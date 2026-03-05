@@ -43,9 +43,17 @@ app.post('/submit', async (req, res) => {
 			? `👤 ${userName} (id: ${user.id}${user.username ? `, @${user.username}` : ''})`
 			: '👤 Аноним';
 
-		const morningMSG = data.morning.map((v) => `\t\t\t\t\t - ${v}`).join('\n');
-		const dayMSG = data.day.map((v) => `\t\t\t\t\t - ${v}`).join('\n');
-		const eveningMSG = data.evening.map((v) => `\t\t\t\t\t - ${v}`).join('\n');
+		const morningLines = [...(data.morning || []).map((v) => `\t\t\t\t\t - ${v}`)];
+		if (data.morningCustom?.trim()) morningLines.push(`\t\t\t\t\t - ${data.morningCustom.trim()} (своё)`);
+		const morningMSG = morningLines.join('\n');
+
+		const dayLines = [...(data.day || []).map((v) => `\t\t\t\t\t - ${v}`)];
+		if (data.dayCustom?.trim()) dayLines.push(`\t\t\t\t\t - ${data.dayCustom.trim()} (своё)`);
+		const dayMSG = dayLines.join('\n');
+
+		const eveningLines = [...(data.evening || []).map((v) => `\t\t\t\t\t - ${v}`)];
+		if (data.eveningCustom?.trim()) eveningLines.push(`\t\t\t\t\t - ${data.eveningCustom.trim()} (своё)`);
+		const eveningMSG = eveningLines.join('\n');
 
 		const text = [
 			'🌸 Новый выбор на 8 марта',
