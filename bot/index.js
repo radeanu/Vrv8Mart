@@ -19,8 +19,6 @@ app.use((req, res, next) => {
 
 app.post('/submit', async (req, res) => {
 	try {
-		console.log('REQ');
-
 		if (!BOT_TOKEN || !ADMIN_CHAT_ID || !USER_CHAT_ID) {
 			console.warn('BOT_TOKEN or ADMIN_CHAT_ID or USER_CHAT_ID not set');
 			return res.status(503).json({ ok: false, error: 'Server not configured' });

@@ -133,8 +133,8 @@ function main() {
 	}
 
 	async function submitForm(data) {
-		showLoading();
 		try {
+			showLoading();
 			const json = JSON.stringify(data);
 
 			await setItem(FORM_KEY, json);
@@ -154,6 +154,8 @@ function main() {
 					}),
 				});
 			}
+
+			hideLoading();
 
 			showResult(data);
 
