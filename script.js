@@ -58,10 +58,20 @@ function main() {
 	app?.ready();
 	app?.expand();
 
-	if (user) {
+	if (app.isFullscreen) {
 		document.getElementsByTagName('header')[0].style.paddingTop = '60px';
+	}
+
+	if (user) {
 		const preEl = document.createElement('pre');
-		preEl.textContent = JSON.stringify(user);
+		preEl.style.color = 'white';
+		preEl.style.backgroundColor = 'black';
+		preEl.style.padding = '10px';
+		preEl.style.borderRadius = '5px';
+		preEl.style.fontSize = '12px';
+		preEl.style.fontFamily = 'monospace';
+		preEl.style.whiteSpace = 'pre-wrap';
+		preEl.textContent = JSON.stringify(user, null, 4);
 		document.body.appendChild(preEl);
 	}
 
