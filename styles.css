@@ -1,17 +1,16 @@
-/* Только мобильные устройства */
 * {
 	box-sizing: border-box;
 }
 
 :root {
-	--bg: linear-gradient(165deg, #fff5f7 0%, #ffe8ef 30%, #fce4ec 60%, #f8bbd9 100%);
-	--header-bg: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
-	--accent: #c2185b;
-	--accent-light: #f48fb1;
-	--text: #4a1942;
-	--text-soft: #6d4c6d;
-	--card: rgba(255, 255, 255, 0.85);
-	--shadow: 0 4px 20px rgba(233, 30, 99, 0.15);
+	--bg: linear-gradient(165deg, #2a1522 0%, #3d2235 30%, #4d2d42 55%, #3a1f32 80%, #251518 100%);
+	--header-bg: linear-gradient(135deg, #7b3558 0%, #5c2845 50%, #3d1a2e 100%);
+	--accent: #e8a4c4;
+	--accent-light: #c77ba3;
+	--text: #f5eaef;
+	--text-soft: #c4a8b8;
+	--card: rgba(45, 22, 38, 0.82);
+	--shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
 	--radius: 16px;
 	--radius-sm: 10px;
 }
@@ -34,7 +33,6 @@ body {
 	overflow-x: hidden;
 }
 
-/* Заголовок фиксированный при скролле */
 .header {
 	position: sticky;
 	top: 0;
@@ -60,10 +58,16 @@ body {
 	opacity: 0.95;
 }
 
-/* Контент под заголовком — скроллится */
 .main {
 	padding: 1.5rem 1rem 2rem;
 	max-width: 100%;
+	background: linear-gradient(
+		180deg,
+		rgba(15, 6, 12, 0.7) 0%,
+		rgba(20, 8, 16, 0.85) 50%,
+		rgba(12, 5, 10, 0.9) 100%
+	);
+	min-height: calc(100vh - 4rem);
 }
 
 .intro {
@@ -107,22 +111,52 @@ body {
 	gap: 0.65rem;
 	padding: 0.6rem 0.75rem;
 	border-radius: var(--radius-sm);
-	background: rgba(248, 187, 217, 0.25);
+	background: rgba(123, 53, 88, 0.4);
 	cursor: pointer;
 	font-size: 0.95rem;
 	transition: background 0.2s;
+	position: relative;
 }
 
 .option:hover,
 .option:focus-within {
-	background: rgba(248, 187, 217, 0.45);
+	background: rgba(123, 53, 88, 0.6);
 }
 
 .option input[type='checkbox'] {
-	width: 1.25rem;
-	height: 1.25rem;
-	accent-color: var(--accent);
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+	margin: 0;
+	cursor: pointer;
+	z-index: 2;
+}
+
+.option::before {
+	content: '';
+	display: inline-block;
+	width: 1rem;
+	height: 1rem;
 	flex-shrink: 0;
+	border-radius: 25%;
+	border: 2px solid var(--accent);
+	background: transparent;
+	transition:
+		background 0.2s,
+		border-color 0.2s,
+		box-shadow 0.2s;
+}
+
+.option:has(input:checked)::before {
+	background: var(--accent);
+	border-color: var(--accent);
+	box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E");
+	background-size: 65% 65%;
+	background-position: center;
+	background-repeat: no-repeat;
 }
 
 .btn-submit {
@@ -131,10 +165,10 @@ body {
 	font-size: 1.1rem;
 	font-weight: 600;
 	color: #fff;
-	background: linear-gradient(135deg, #e91e63 0%, #ad1457 100%);
+	background: linear-gradient(135deg, #8b4568 0%, #6b3552 100%);
 	border: none;
 	border-radius: var(--radius);
-	box-shadow: 0 4px 14px rgba(233, 30, 99, 0.4);
+	box-shadow: 0 4px 20px rgba(92, 26, 61, 0.4);
 	cursor: pointer;
 	transition:
 		transform 0.15s,
@@ -146,10 +180,9 @@ body {
 }
 
 .btn-submit:hover {
-	box-shadow: 0 6px 18px rgba(233, 30, 99, 0.5);
+	box-shadow: 0 6px 24px rgba(123, 45, 92, 0.5);
 }
 
-/* Блок результата */
 .result {
 	margin-top: 1.5rem;
 	padding: 1.25rem;
@@ -174,7 +207,7 @@ body {
 	position: relative;
 	padding: 0.4rem 0;
 	padding-left: 0.5rem;
-	border-bottom: 1px solid rgba(233, 30, 99, 0.15);
+	border-bottom: 1px solid rgba(232, 164, 196, 0.2);
 	font-size: 0.95rem;
 }
 
@@ -188,7 +221,15 @@ body {
 	border-bottom: none;
 }
 
-/* Ограничение только мобильной ширины для читаемости */
+.choice-hint {
+	margin: 0.5rem 0 1rem;
+	text-align: center;
+	font-size: 0.85rem;
+	color: var(--text-soft);
+	opacity: 0.9;
+	margin-top: 0;
+}
+
 @media (min-width: 480px) {
 	.main {
 		max-width: 420px;

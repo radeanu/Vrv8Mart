@@ -4,25 +4,6 @@
   const resultSection = document.getElementById('result-section');
   const resultList = document.getElementById('result-list');
 
-  /** Человекочитаемые названия занятий */
-  const labels = {
-    'breakfast-in-bed': 'Завтрак в постель',
-    'morning-coffee': 'Утренний кофе вместе',
-    'spa-morning': 'Спа-утро (маски, ванна)',
-    'sleep-in': 'Спокойное пробуждение без будильника',
-    'park-walk': 'Прогулка в парке',
-    'cafe': 'Поход в кафе',
-    'shopping': 'Шоппинг',
-    'cinema': 'Кино',
-    'masterclass': 'Мастер-класс',
-    'photosession': 'Фотосессия',
-    'romantic-dinner': 'Романтический ужин',
-    'home-cinema': 'Домашний кинотеатр',
-    'massage': 'Массаж',
-    'restaurant': 'Ресторан',
-    'concert': 'Концерт или театр'
-  };
-
   function getSelected() {
     const data = { morning: [], day: [], evening: [] };
     form.querySelectorAll('input[type="checkbox"]:checked').forEach(function (input) {
@@ -41,7 +22,7 @@
     resultList.innerHTML = '';
     all.forEach(function (item) {
       const li = document.createElement('li');
-      li.textContent = labels[item.value] || item.value;
+      li.textContent = item.value;
       resultList.appendChild(li);
     });
     resultSection.hidden = all.length === 0;

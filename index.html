@@ -1,63 +1,128 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>8 марта — Твой день</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <header class="header">
-    <h1 class="header-title">Дорогая, с 8 марта!</h1>
-    <p class="header-subtitle">Твой особенный день</p>
-  </header>
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		/>
+		<title>8 марта — Твой день</title>
+		<link rel="stylesheet" href="styles.css" />
+	</head>
+	<body>
+		<header class="header">
+			<h1 class="header-title">Дорогая, с 8 марта!</h1>
+			<p class="header-subtitle">Твой особенный день</p>
+		</header>
 
-  <main class="main">
-    <p class="intro">Выбери, чем хочешь заняться в этот праздничный день. Можно отметить несколько вариантов в каждом блоке.</p>
+		<main class="main">
+			<p class="intro">
+				С праздником весны, любви и женского счастья! Этот день посвящен тебе - самой любимой, родной
+				и нежной. Пусть каждый момент этого праздника наполнится радостью, улыбками и любовью близких.
+			</p>
 
-    <form class="form" id="day-form">
-      <section class="form-section">
-        <h2 class="section-title">☀️ Утро</h2>
-        <div class="options">
-          <label class="option"><input type="checkbox" name="morning" value="breakfast-in-bed"> Завтрак в постель</label>
-          <label class="option"><input type="checkbox" name="morning" value="morning-coffee"> Утренний кофе вместе</label>
-          <label class="option"><input type="checkbox" name="morning" value="spa-morning"> Спа-утро (маски, ванна)</label>
-          <label class="option"><input type="checkbox" name="morning" value="sleep-in"> Спокойное пробуждение без будильника</label>
-        </div>
-      </section>
+			<p class="choice-hint">Выбор можно менять в любое время</p>
 
-      <section class="form-section">
-        <h2 class="section-title">🌤 День</h2>
-        <div class="options">
-          <label class="option"><input type="checkbox" name="day" value="park-walk"> Прогулка в парке</label>
-          <label class="option"><input type="checkbox" name="day" value="cafe"> Поход в кафе</label>
-          <label class="option"><input type="checkbox" name="day" value="shopping"> Шоппинг</label>
-          <label class="option"><input type="checkbox" name="day" value="cinema"> Кино</label>
-          <label class="option"><input type="checkbox" name="day" value="masterclass"> Мастер-класс</label>
-          <label class="option"><input type="checkbox" name="day" value="photosession"> Фотосессия</label>
-        </div>
-      </section>
+			<form class="form" id="day-form">
+				<section class="form-section">
+					<h2 class="section-title">☀️ Утром</h2>
+					<div class="options">
+						<label class="option">
+							<input type="checkbox" name="morning" value="Завтрак в постель" />
+							👑 Завтрак в постель
+						</label>
+						<label class="option">
+							<input type="checkbox" name="morning" value="Кофе/Чай" />
+							☕ Кофе/Чай
+						</label>
+						<label class="option">
+							<input type="checkbox" name="morning" value="Спа-утро (маски, ванна)" />
+							🪆 Блинчики
+						</label>
+						<label class="option">
+							<input type="checkbox" name="morning" value="Фруктовый салат с йогуртом" />
+							🍜 Фруктовый салат с йогуртом
+						</label>
+						<label class="option">
+							<input type="checkbox" name="morning" value="Тосты с авокадо и яйцом" />
+							🥑 Тосты с авокадо и яйцом
+						</label>
+						<label class="option">
+							<input type="checkbox" name="morning" value="Омлет Пуляр" />
+							😊 Омлет Пуляр
+						</label>
+						<label class="option">
+							<input type="checkbox" name="morning" value="Шакшука" />
+							🍳 Шакшука
+						</label>
+						<label class="option">
+							<input type="checkbox" name="morning" value="Овсянка" />
+							🥣 Овсянка
+						</label>
+					</div>
+				</section>
 
-      <section class="form-section">
-        <h2 class="section-title">🌙 Вечер</h2>
-        <div class="options">
-          <label class="option"><input type="checkbox" name="evening" value="romantic-dinner"> Романтический ужин</label>
-          <label class="option"><input type="checkbox" name="evening" value="home-cinema"> Домашний кинотеатр</label>
-          <label class="option"><input type="checkbox" name="evening" value="massage"> Массаж</label>
-          <label class="option"><input type="checkbox" name="evening" value="restaurant"> Ресторан</label>
-          <label class="option"><input type="checkbox" name="evening" value="concert"> Концерт или театр</label>
-        </div>
-      </section>
+				<section class="form-section">
+					<h2 class="section-title">🌤 Днем</h2>
+					<div class="options">
+						<label class="option">
+							<input type="checkbox" name="day" value="Прогулка в парке" />
+							🌳 Прогулка в парке
+						</label>
+						<label class="option">
+							<input type="checkbox" name="day" value="В парке пача-мама" />
+							🦙 Парк альпак «Пача Мама»
+						</label>
+						<label class="option">
+							<input type="checkbox" name="day" value="В гости к родным" />
+							🫂 В гости к родным
+						</label>
+						<label class="option">
+							<input type="checkbox" name="day" value="Экспресс-поход в кафе" />
+							🍵 Экспресс-поход в кафе
+						</label>
+						<label class="option">
+							<input type="checkbox" name="day" value="Шоппинг" />
+							🛒 Шоппинг
+						</label>
+					</div>
+				</section>
 
-      <button type="submit" class="btn-submit" id="submit-btn">Повелеваю</button>
-    </form>
+				<section class="form-section">
+					<h2 class="section-title">🌙 Вечером</h2>
+					<div class="options">
+						<label class="option">
+							<input type="checkbox" name="evening" value="Ужин (заказать)" />
+							🍷 Ужин (заказать вкусненькое)
+						</label>
+						<label class="option">
+							<input type="checkbox" name="evening" value="Домашний кинотеатр" />
+							🎬 Домашний кинотеатр
+						</label>
+						<label class="option">
+							<input type="checkbox" name="evening" value="Массаж спины" />
+							🫶 Массаж спины и плеч
+						</label>
+						<label class="option">
+							<input type="checkbox" name="evening" value="Массаж ягодиц" />
+							😉 Массаж ягодиц
+						</label>
+						<label class="option">
+							<input type="checkbox" name="evening" value="Массаж рук и ног" />
+							🤌 Массаж рук и ног
+						</label>
+					</div>
+				</section>
 
-    <section class="result" id="result-section" hidden>
-      <h2 class="result-title">Твой выбор на сегодня</h2>
-      <ul class="result-list" id="result-list"></ul>
-    </section>
-  </main>
+				<button type="submit" class="btn-submit" id="submit-btn">Повелеваю</button>
+			</form>
 
-  <script src="script.js"></script>
-</body>
+			<section class="result" id="result-section" hidden>
+				<h2 class="result-title">Твой выбор на сегодня</h2>
+				<ul class="result-list" id="result-list"></ul>
+			</section>
+		</main>
+
+		<script src="script.js"></script>
+	</body>
 </html>
