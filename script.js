@@ -49,42 +49,38 @@ function useStorage() {
 }
 
 function main() {
-	const { getItem, setItem, isTelegram } = useStorage();
+	const { getItem, setItem } = useStorage();
 
 	const app = window.Telegram?.WebApp;
 	const user = app?.initDataUnsafe?.user;
 	const backendUrl = 'https://gloomily-agile-dory.cloudpub.ru';
 
-	app?.disableVerticalSwipes();
-	app?.ready();
-	app?.expand();
-
-	if (app.isFullscreen) {
-		document.getElementsByTagName('header')[0].style.paddingTop = '120px';
-	}
-
-	if (user) {
-		const preEl = document.createElement('pre');
-		preEl.style.color = 'white';
-		preEl.style.backgroundColor = 'black';
-		preEl.style.padding = '10px';
-		preEl.style.borderRadius = '5px';
-		preEl.style.fontSize = '12px';
-		preEl.style.fontFamily = 'monospace';
-		preEl.style.whiteSpace = 'pre-wrap';
-		preEl.textContent = JSON.stringify(user, null, 4);
-		preEl.style.minHeight = '400px';
-		document.body.appendChild(preEl);
-	}
-
+	const USER_ID = '7429101567';
 	const FORM_KEY = 'vrv8mart_choice';
 	const form = document.getElementById('day-form');
 	const resultSection = document.getElementById('result-section');
 	const resultList = document.getElementById('result-list');
+	const forbiddenSection = document.getElementById('forbidden-section');
+
+	init();
 
 	setTimeout(async () => {
 		await restoreForm();
-	}, 100);
+	}, 0);
+
+	function init() {
+		app?.disableVerticalSwipes();
+		app?.ready();
+		app?.expand();
+
+		if (app.isFullscreen) {
+			document.getElementsByTagName('header')[0].style.paddingTop = '120px';
+		}
+
+		if (user?.id?.toString?.() !== USER_ID) {
+			forbiddenSection.style.display = 'flex';
+		}
+	}
 
 	function getSelected() {
 		const data = { morning: [], day: [], evening: [] };
@@ -117,27 +113,14 @@ function main() {
 	}
 
 	async function submitForm(data) {
-		const preEl = document.createElement('pre');
-		preEl.style.color = 'white';
-		preEl.style.backgroundColor = 'black';
-		preEl.style.padding = '10px';
-		preEl.style.borderRadius = '5px';
-		preEl.style.fontSize = '12px';
-		preEl.style.fontFamily = 'monospace';
-		preEl.style.whiteSpace = 'pre-wrap';
-		preEl.style.minHeight = '400px';
-		preEl.textContent = 'RESULT:\n';
-		document.body.appendChild(preEl);
+		try {
+			const json = JSON.stringify(data);
 
-		const json = JSON.stringify(data);
+			await setItem(FORM_KEY, json);
 
-		await setItem(FORM_KEY, json);
+			if (!user) return;
 
-		preEl.textContent += `USER: ${user.id}\n`;
-		preEl.textContent += `SEND: ${backendUrl}/submit\n`;
-
-		if (user) {
-			fetch(`${backendUrl}/submit`, {
+			await fetch(`${backendUrl}/submit`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({
@@ -149,23 +132,15 @@ function main() {
 					},
 					data,
 				}),
-			})
-				.then(function (res) {
-					preEl.textContent += `STATUS: ${res.status}\n`;
-					return res.json();
-				})
-				.then(function (data) {
-					preEl.textContent += `DATA: ${JSON.stringify(data, null, 4)}\n`;
-				})
-				.catch(function (err) {
-					preEl.textContent += `ERROR: ${err.toString()}\n`;
-				});
-		}
+			});
 
-		showResult(data);
+			showResult(data);
 
-		if (!resultSection.hidden) {
-			resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			if (!resultSection.hidden) {
+				resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+			}
+		} catch (error) {
+			console.log(err);
 		}
 	}
 

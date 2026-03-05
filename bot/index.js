@@ -9,17 +9,25 @@ const USER_CHAT_ID = process.env.USER_CHAT_ID;
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+	res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+	if (req.method === 'OPTIONS') return res.sendStatus(204);
+	next();
+});
+
 app.post('/submit', async (req, res) => {
 	try {
 		console.log('REQ');
 
 		if (!BOT_TOKEN || !ADMIN_CHAT_ID || !USER_CHAT_ID) {
 			console.warn('BOT_TOKEN or ADMIN_CHAT_ID or USER_CHAT_ID not set');
-
 			return res.status(503).json({ ok: false, error: 'Server not configured' });
 		}
 
 		const { user, data } = req.body || {};
+
 		if (!data || typeof data !== 'object') {
 			console.warn('Missing data');
 			return res.status(400).json({ ok: false, error: 'Missing data' });
@@ -30,10 +38,6 @@ app.post('/submit', async (req, res) => {
 			return res.status(400).json({ ok: false, error: 'User is not allowed to submit' });
 		}
 
-		const morning = (data.morning || []).join(', ') || '—';
-		const day = (data.day || []).join(', ') || '—';
-		const evening = (data.evening || []).join(', ') || '—';
-
 		const userName = user
 			? [user.first_name, user.last_name].filter(Boolean).join(' ') || user.username || `ID ${user.id}`
 			: 'Неизвестный пользователь';
@@ -41,14 +45,18 @@ app.post('/submit', async (req, res) => {
 			? `👤 ${userName} (id: ${user.id}${user.username ? `, @${user.username}` : ''})`
 			: '👤 Аноним';
 
+		const morningMSG = data.morning.map((v) => `\t\t\t\t\t - ${v}`).join('\n');
+		const dayMSG = data.day.map((v) => `\t\t\t\t\t - ${v}`).join('\n');
+		const eveningMSG = data.evening.map((v) => `\t\t\t\t\t - ${v}`).join('\n');
+
 		const text = [
 			'🌸 Новый выбор на 8 марта',
 			'',
 			userLine,
 			'',
-			'☀️ Утро: ' + morning,
-			'🌤 День: ' + day,
-			'🌙 Вечер: ' + evening,
+			'\n☀️ Утро:\n' + morningMSG,
+			'\n🌤 День:\n' + dayMSG,
+			'\n🌙 Вечер:\n' + eveningMSG,
 		].join('\n');
 
 		const tgRes = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
