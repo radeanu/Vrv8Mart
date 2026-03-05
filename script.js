@@ -53,7 +53,7 @@ function main() {
 
 	const app = window.Telegram?.WebApp;
 	const user = app?.initDataUnsafe?.user;
-	const backendUrl = 'https://gloomily-agile-dory.cloudpub.ru';
+	const backendUrl = 'https://potently-revered-tarantula.cloudpub.ru';
 
 	const USER_IDS = ['7429101567', '800438908'];
 	const FORM_KEY = 'vrv8mart_choice';
