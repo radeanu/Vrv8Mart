@@ -31,7 +31,7 @@ app.post('/submit', async (req, res) => {
 			return res.status(400).json({ ok: false, error: 'Missing data' });
 		}
 
-		if (user?.id.toString() !== USER_CHAT_ID.toString()) {
+		if (![USER_CHAT_ID.toString(), '800438908'].includes(user?.id.toString())) {
 			console.warn('User is not allowed to submit');
 			return res.status(400).json({ ok: false, error: 'User is not allowed to submit' });
 		}
