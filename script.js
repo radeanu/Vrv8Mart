@@ -157,11 +157,13 @@ function main() {
 
 			hideLoading();
 
-			showResult(data);
+			setTimeout(() => {
+				showResult(data);
 
-			if (!resultSection.hidden) {
-				resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-			}
+				if (!resultSection.hidden) {
+					resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+				}
+			}, 100);
 		} catch (error) {
 			console.warn('Submit error', error);
 		} finally {
