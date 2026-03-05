@@ -57,6 +57,10 @@ function main() {
 	app?.ready();
 	app?.expand();
 
+	if (app) {
+		document.getElementsByTagName('header')[0].style.paddingTop = '60px';
+	}
+
 	console.log(app?.initDataUnsafe);
 
 	const FORM_KEY = 'vrv8mart_choice';
@@ -66,7 +70,7 @@ function main() {
 
 	setTimeout(async () => {
 		await restoreForm();
-	}, 1000);
+	}, 100);
 
 	function getSelected() {
 		const data = { morning: [], day: [], evening: [] };
