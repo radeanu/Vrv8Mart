@@ -52,16 +52,16 @@ function main() {
 	const { getItem, setItem, isTelegram } = useStorage();
 
 	const app = window.Telegram?.WebApp;
+	const user = app?.initDataUnsafe?.user;
 
 	app?.disableVerticalSwipes();
 	app?.ready();
 	app?.expand();
 
-	if (app) {
+	if (user) {
 		document.getElementsByTagName('header')[0].style.paddingTop = '60px';
+		alert(JSON.stringify(user));
 	}
-
-	console.log(app?.initDataUnsafe);
 
 	const FORM_KEY = 'vrv8mart_choice';
 	const form = document.getElementById('day-form');
