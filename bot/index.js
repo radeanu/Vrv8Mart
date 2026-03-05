@@ -11,6 +11,8 @@ app.use(express.json());
 
 app.post('/submit', async (req, res) => {
 	try {
+		console.log('REQ');
+
 		if (!BOT_TOKEN || !ADMIN_CHAT_ID || !USER_CHAT_ID) {
 			console.warn('BOT_TOKEN or ADMIN_CHAT_ID or USER_CHAT_ID not set');
 

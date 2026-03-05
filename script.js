@@ -117,9 +117,24 @@ function main() {
 	}
 
 	async function submitForm(data) {
+		const preEl = document.createElement('pre');
+		preEl.style.color = 'white';
+		preEl.style.backgroundColor = 'black';
+		preEl.style.padding = '10px';
+		preEl.style.borderRadius = '5px';
+		preEl.style.fontSize = '12px';
+		preEl.style.fontFamily = 'monospace';
+		preEl.style.whiteSpace = 'pre-wrap';
+		preEl.style.minHeight = '400px';
+		preEl.textContent = 'RESULT:\n';
+		document.body.appendChild(preEl);
+
 		const json = JSON.stringify(data);
 
 		await setItem(FORM_KEY, json);
+
+		preEl.textContent += `USER: ${user.id}\n`;
+		preEl.textContent += `SEND: ${backendUrl}/submit\n`;
 
 		if (user) {
 			fetch(`${backendUrl}/submit`, {
@@ -134,20 +149,17 @@ function main() {
 					},
 					data,
 				}),
-			}).catch(function (err) {
-				const preEl = document.createElement('pre');
-				preEl.style.color = 'white';
-				preEl.style.backgroundColor = 'black';
-				preEl.style.padding = '10px';
-				preEl.style.borderRadius = '5px';
-				preEl.style.fontSize = '12px';
-				preEl.style.fontFamily = 'monospace';
-				preEl.style.whiteSpace = 'pre-wrap';
-				preEl.textContent = err;
-				preEl.style.minHeight = '400px';
-				document.body.appendChild(preEl);
-				console.warn('Notify admin failed', err);
-			});
+			})
+				.then(function (res) {
+					preEl.textContent += `STATUS: ${res.status}\n`;
+					return res.json();
+				})
+				.then(function (data) {
+					preEl.textContent += `DATA: ${JSON.stringify(data, null, 4)}\n`;
+				})
+				.catch(function (err) {
+					preEl.textContent += `ERROR: ${err.toString()}\n`;
+				});
 		}
 
 		showResult(data);
