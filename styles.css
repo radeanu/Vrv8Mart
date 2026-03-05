@@ -166,6 +166,41 @@ body {
 	background-repeat: no-repeat;
 }
 
+.custom-input-wrap {
+	margin-top: 0.5rem;
+	padding-top: 0.5rem;
+	border-top: 1px solid rgba(232, 164, 196, 0.25);
+}
+
+.custom-label {
+	display: block;
+	font-size: 0.9rem;
+	color: var(--text-soft);
+	margin-bottom: 0.35rem;
+}
+
+.custom-input {
+	width: 100%;
+	padding: 0.6rem 0.75rem;
+	font-size: 0.95rem;
+	color: var(--text);
+	background: rgba(123, 53, 88, 0.4);
+	border: 1px solid rgba(232, 164, 196, 0.35);
+	border-radius: var(--radius-sm);
+	outline: none;
+	transition: border-color 0.2s, background 0.2s;
+}
+
+.custom-input::placeholder {
+	color: var(--text-soft);
+	opacity: 0.8;
+}
+
+.custom-input:focus {
+	border-color: var(--accent);
+	background: rgba(123, 53, 88, 0.55);
+}
+
 .btn-submit {
 	margin-top: 0.5rem;
 	padding: 1rem 1.5rem;

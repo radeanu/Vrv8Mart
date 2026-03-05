@@ -103,11 +103,17 @@ function main() {
 	}
 
 	function getSelected() {
-		const data = { morning: [], day: [], evening: [] };
+		const data = { morning: [], day: [], evening: [], morningCustom: '', dayCustom: '', eveningCustom: '' };
 		form.querySelectorAll('input[type="checkbox"]:checked').forEach(function (input) {
 			const name = input.getAttribute('name');
 			if (data[name]) data[name].push(input.value);
 		});
+		const morningCustom = form.querySelector('input[name="morning_custom"]');
+		const dayCustom = form.querySelector('input[name="day_custom"]');
+		const eveningCustom = form.querySelector('input[name="evening_custom"]');
+		if (morningCustom?.value?.trim()) data.morningCustom = morningCustom.value.trim();
+		if (dayCustom?.value?.trim()) data.dayCustom = dayCustom.value.trim();
+		if (eveningCustom?.value?.trim()) data.eveningCustom = eveningCustom.value.trim();
 		return data;
 	}
 
@@ -116,12 +122,15 @@ function main() {
 			...data.morning.map(function (v) {
 				return { period: 'Утро', value: v };
 			}),
+			...(data.morningCustom ? [{ period: 'Утро', value: data.morningCustom }] : []),
 			...data.day.map(function (v) {
 				return { period: 'День', value: v };
 			}),
+			...(data.dayCustom ? [{ period: 'День', value: data.dayCustom }] : []),
 			...data.evening.map(function (v) {
 				return { period: 'Вечер', value: v };
 			}),
+			...(data.eveningCustom ? [{ period: 'Вечер', value: data.eveningCustom }] : []),
 		];
 		resultList.innerHTML = '';
 		all.forEach(function (item) {
@@ -185,6 +194,13 @@ function main() {
 					input.checked = true;
 				}
 			});
+
+			const morningCustomEl = form.querySelector('input[name="morning_custom"]');
+			const dayCustomEl = form.querySelector('input[name="day_custom"]');
+			const eveningCustomEl = form.querySelector('input[name="evening_custom"]');
+			if (morningCustomEl && data.morningCustom) morningCustomEl.value = data.morningCustom;
+			if (dayCustomEl && data.dayCustom) dayCustomEl.value = data.dayCustom;
+			if (eveningCustomEl && data.eveningCustom) eveningCustomEl.value = data.eveningCustom;
 
 			showResult(data);
 		} catch (err) {
