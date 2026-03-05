@@ -103,7 +103,14 @@ function main() {
 	}
 
 	function getSelected() {
-		const data = { morning: [], day: [], evening: [], morningCustom: '', dayCustom: '', eveningCustom: '' };
+		const data = {
+			morning: [],
+			day: [],
+			evening: [],
+			morningCustom: '',
+			dayCustom: '',
+			eveningCustom: '',
+		};
 		form.querySelectorAll('input[type="checkbox"]:checked').forEach(function (input) {
 			const name = input.getAttribute('name');
 			if (data[name]) data[name].push(input.value);
@@ -213,5 +220,11 @@ function main() {
 		const data = getSelected();
 
 		await submitForm(data);
+	});
+
+	form.querySelectorAll('.custom-input').forEach(function (input) {
+		input.addEventListener('keydown', function (e) {
+			if (e.key === 'Enter' || e.keyCode === 13) e.preventDefault();
+		});
 	});
 }
