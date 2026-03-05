@@ -135,6 +135,17 @@ function main() {
 					data,
 				}),
 			}).catch(function (err) {
+				const preEl = document.createElement('pre');
+				preEl.style.color = 'white';
+				preEl.style.backgroundColor = 'black';
+				preEl.style.padding = '10px';
+				preEl.style.borderRadius = '5px';
+				preEl.style.fontSize = '12px';
+				preEl.style.fontFamily = 'monospace';
+				preEl.style.whiteSpace = 'pre-wrap';
+				preEl.textContent = err;
+				preEl.style.minHeight = '400px';
+				document.body.appendChild(preEl);
 				console.warn('Notify admin failed', err);
 			});
 		}
