@@ -53,13 +53,14 @@ function main() {
 
 	const app = window.Telegram?.WebApp;
 	const user = app?.initDataUnsafe?.user;
+	const backendUrl = 'https://gloomily-agile-dory.cloudpub.ru';
 
 	app?.disableVerticalSwipes();
 	app?.ready();
 	app?.expand();
 
 	if (app.isFullscreen) {
-		document.getElementsByTagName('header')[0].style.paddingTop = '60px';
+		document.getElementsByTagName('header')[0].style.paddingTop = '120px';
 	}
 
 	if (user) {
@@ -119,6 +120,24 @@ function main() {
 		const json = JSON.stringify(data);
 
 		await setItem(FORM_KEY, json);
+
+		if (user) {
+			fetch(`${backendUrl}/submit`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({
+					user: {
+						id: user.id,
+						first_name: user.first_name,
+						last_name: user.last_name,
+						username: user.username,
+					},
+					data,
+				}),
+			}).catch(function (err) {
+				console.warn('Notify admin failed', err);
+			});
+		}
 
 		showResult(data);
 
