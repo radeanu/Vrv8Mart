@@ -55,7 +55,7 @@ function main() {
 	const user = app?.initDataUnsafe?.user;
 	const backendUrl = 'https://gloomily-agile-dory.cloudpub.ru';
 
-	const USER_ID = '7429101567';
+	const USER_IDS = ['7429101567', '800438908'];
 	const FORM_KEY = 'vrv8mart_choice';
 	const form = document.getElementById('day-form');
 	const resultSection = document.getElementById('result-section');
@@ -77,7 +77,7 @@ function main() {
 			document.getElementsByTagName('header')[0].style.paddingTop = '120px';
 		}
 
-		if (user?.id?.toString?.() !== USER_ID) {
+		if (!USER_IDS.includes(user?.id?.toString?.())) {
 			forbiddenSection.style.display = 'flex';
 		}
 	}
