@@ -55,7 +55,7 @@ function main() {
 	const user = app?.initDataUnsafe?.user;
 	const backendUrl = 'https://potently-revered-tarantula.cloudpub.ru';
 
-	const USER_IDS = ['7429101567', '800438908'];
+	const USER_IDS = ['7429101567', '800438908', '723475332'];
 	const FORM_KEY = 'vrv8mart_choice';
 	const form = document.getElementById('day-form');
 	const resultSection = document.getElementById('result-section');
