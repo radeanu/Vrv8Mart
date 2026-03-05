@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С праздником 8 Марта!</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="fixed-header">
+        <h1 id="personalized-greeting">Дорогая моя!</h1>
+    </header>
+    
+    <main class="content">
+        <div class="scrolling-content">
+            <p>С праздником весны, любви и женского счастья! Этот день посвящен тебе - самой любимой, родной и нежной. Пусть каждый момент этого праздника наполнится радостью, улыбками и любовью близких.</p>
+            
+            <section class="form-section">
+                <h2>Выбери, чем хочешь заняться в этот особенный день:</h2>
+                
+                <div class="activity-group">
+                    <h3>Утро</h3>
+                    <label><input type="checkbox" name="morning" value="Завтрак в постель"> Завтрак в постель</label>
+                    <label><input type="checkbox" name="morning" value="Массаж"> Массаж</label>
+                    <label><input type="checkbox" name="morning" value="Прогулка в парке"> Прогулка в парке</label>
+                </div>
+                
+                <div class="activity-group">
+                    <h3>День</h3>
+                    <label><input type="checkbox" name="day" value="Шопинг"> Шопинг</label>
+                    <label><input type="checkbox" name="day" value="Спа-процедуры"> Спа-процедуры</label>
+                    <label><input type="checkbox" name="day" value="Обед в ресторане"> Обед в ресторане</label>
+                </div>
+                
+                <div class="activity-group">
+                    <h3>Вечер</h3>
+                    <label><input type="checkbox" name="evening" value="Кино дома"> Кино дома</label>
+                    <label><input type="checkbox" name="evening" value="Ужин при свечах"> Ужин при свечах</label>
+                    <label><input type="checkbox" name="evening" value="Игра в настольные игры"> Игра в настольные игры</label>
+                </div>
+                
+                <button id="submit-btn">Повелеваю</button>
+            </section>
+            
+            <div id="results" class="results hidden">
+                <h2>Твой идеальный день:</h2>
+                <ul id="activities-list"></ul>
+            </div>
+        </div>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
