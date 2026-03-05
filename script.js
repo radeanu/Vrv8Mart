@@ -60,7 +60,9 @@ function main() {
 
 	if (user) {
 		document.getElementsByTagName('header')[0].style.paddingTop = '60px';
-		alert(JSON.stringify(user));
+		const preEl = document.createElement('pre');
+		preEl.textContent = JSON.stringify(user);
+		document.body.appendChild(preEl);
 	}
 
 	const FORM_KEY = 'vrv8mart_choice';
