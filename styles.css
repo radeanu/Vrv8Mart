@@ -20,6 +20,13 @@ html {
 	-webkit-text-size-adjust: 100%;
 }
 
+body.forbidden-visible,
+body.loading-visible {
+	overflow: hidden;
+	position: fixed;
+	width: 100%;
+}
+
 body {
 	margin: 0;
 	min-height: 100vh;
@@ -230,16 +237,26 @@ body {
 	margin-top: 0;
 }
 
-#forbidden-section {
+.overlay-section {
 	position: fixed;
 	inset: 0;
 	z-index: 99999;
-	display: flex;
+	display: flex !important;
 	align-items: center;
 	justify-content: center;
 	background: var(--bg);
 	padding: 1.5rem;
 	text-align: center;
+}
+
+.overlay-section[style*='display: none'] {
+	display: none !important;
+}
+
+.overlay-section-text {
+	margin: 0;
+	font-size: 1.1rem;
+	color: var(--text-soft);
 }
 
 @media (min-width: 480px) {

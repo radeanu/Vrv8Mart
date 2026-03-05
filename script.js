@@ -61,6 +61,17 @@ function main() {
 	const resultSection = document.getElementById('result-section');
 	const resultList = document.getElementById('result-list');
 	const forbiddenSection = document.getElementById('forbidden-section');
+	const loadingSection = document.getElementById('loading-section');
+
+	function showLoading() {
+		loadingSection.style.display = 'flex';
+		document.body.classList.add('loading-visible');
+	}
+
+	function hideLoading() {
+		loadingSection.style.display = 'none';
+		document.body.classList.remove('loading-visible');
+	}
 
 	init();
 
@@ -69,16 +80,25 @@ function main() {
 	}, 0);
 
 	function init() {
-		app?.disableVerticalSwipes();
-		app?.ready();
-		app?.expand();
+		try {
+			showLoading();
 
-		if (app.isFullscreen) {
-			document.getElementsByTagName('header')[0].style.paddingTop = '120px';
-		}
+			app?.disableVerticalSwipes();
+			app?.ready();
+			app?.expand();
 
-		if (!USER_IDS.includes(user?.id?.toString?.())) {
-			forbiddenSection.style.display = 'flex';
+			if (app.isFullscreen) {
+				document.getElementsByTagName('header')[0].style.paddingTop = '100px';
+			}
+
+			if (!USER_IDS.includes(user?.id?.toString?.())) {
+				forbiddenSection.style.display = 'flex';
+				document.body.classList.add('forbidden-visible');
+			}
+		} catch (error) {
+			console.log(error);
+		} finally {
+			hideLoading();
 		}
 	}
 
@@ -113,26 +133,27 @@ function main() {
 	}
 
 	async function submitForm(data) {
+		showLoading();
 		try {
 			const json = JSON.stringify(data);
 
 			await setItem(FORM_KEY, json);
 
-			if (!user) return;
-
-			await fetch(`${backendUrl}/submit`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					user: {
-						id: user.id,
-						first_name: user.first_name,
-						last_name: user.last_name,
-						username: user.username,
-					},
-					data,
-				}),
-			});
+			if (user) {
+				await fetch(`${backendUrl}/submit`, {
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						user: {
+							id: user.id,
+							first_name: user.first_name,
+							last_name: user.last_name,
+							username: user.username,
+						},
+						data,
+					}),
+				});
+			}
 
 			showResult(data);
 
@@ -140,7 +161,9 @@ function main() {
 				resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 			}
 		} catch (error) {
-			console.log(err);
+			console.warn('Submit error', error);
+		} finally {
+			hideLoading();
 		}
 	}
 
