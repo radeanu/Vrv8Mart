@@ -72,6 +72,7 @@ function main() {
 		preEl.style.fontFamily = 'monospace';
 		preEl.style.whiteSpace = 'pre-wrap';
 		preEl.textContent = JSON.stringify(user, null, 4);
+		preEl.style.minHeight = '400px';
 		document.body.appendChild(preEl);
 	}
 
