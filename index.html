@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>8 марта — Твой день</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="header">
+    <h1 class="header-title">Дорогая, с 8 марта!</h1>
+    <p class="header-subtitle">Твой особенный день</p>
+  </header>
+
+  <main class="main">
+    <p class="intro">Выбери, чем хочешь заняться в этот праздничный день. Можно отметить несколько вариантов в каждом блоке.</p>
+
+    <form class="form" id="day-form">
+      <section class="form-section">
+        <h2 class="section-title">☀️ Утро</h2>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="morning" value="breakfast-in-bed"> Завтрак в постель</label>
+          <label class="option"><input type="checkbox" name="morning" value="morning-coffee"> Утренний кофе вместе</label>
+          <label class="option"><input type="checkbox" name="morning" value="spa-morning"> Спа-утро (маски, ванна)</label>
+          <label class="option"><input type="checkbox" name="morning" value="sleep-in"> Спокойное пробуждение без будильника</label>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2 class="section-title">🌤 День</h2>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="day" value="park-walk"> Прогулка в парке</label>
+          <label class="option"><input type="checkbox" name="day" value="cafe"> Поход в кафе</label>
+          <label class="option"><input type="checkbox" name="day" value="shopping"> Шоппинг</label>
+          <label class="option"><input type="checkbox" name="day" value="cinema"> Кино</label>
+          <label class="option"><input type="checkbox" name="day" value="masterclass"> Мастер-класс</label>
+          <label class="option"><input type="checkbox" name="day" value="photosession"> Фотосессия</label>
+        </div>
+      </section>
+
+      <section class="form-section">
+        <h2 class="section-title">🌙 Вечер</h2>
+        <div class="options">
+          <label class="option"><input type="checkbox" name="evening" value="romantic-dinner"> Романтический ужин</label>
+          <label class="option"><input type="checkbox" name="evening" value="home-cinema"> Домашний кинотеатр</label>
+          <label class="option"><input type="checkbox" name="evening" value="massage"> Массаж</label>
+          <label class="option"><input type="checkbox" name="evening" value="restaurant"> Ресторан</label>
+          <label class="option"><input type="checkbox" name="evening" value="concert"> Концерт или театр</label>
+        </div>
+      </section>
+
+      <button type="submit" class="btn-submit" id="submit-btn">Повелеваю</button>
+    </form>
+
+    <section class="result" id="result-section" hidden>
+      <h2 class="result-title">Твой выбор на сегодня</h2>
+      <ul class="result-list" id="result-list"></ul>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
